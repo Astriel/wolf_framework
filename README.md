@@ -20,5 +20,22 @@ This is a list of rules and convention I'm going to follow on this project, and 
 Github
 --------------
 
-1. - Don't commit directly on the master before to be sure that your code is working, except if you are fixing a major bug directly on the master. The master branch will be the main one with the current running application and the last working version. 
+1. Don't commit directly on the master before to be sure that your code is working, except if you are fixing a major bug directly on the master. The master branch will be the main one with the current running application and the last working version. 
+2. When you commit something, try to put a REAL and understable. Example : Commiting some files => Adding login feature.
+3. Title format for a commit : [Short title] - description.
+4. When you want to create another branch, be sure that is usefull, and don't forget to include all changing of the master each time.
 
+Documentation
+--------------
+
+Issues
+--------------
+
+PHP
+--------------
+
+HTML 5
+--------------
+
+CSS 3
+--------------
