@@ -1,10 +1,4 @@
 <?php
-/*
-*
-*
-*
-*
-*/
 
 // Defining PATH constants related to the project
 define( 'BASE_PATH', dirname( realpath(__FILE__) ) );
@@ -32,7 +26,16 @@ switch ( APP_MODE ) {
 
 }
 
-// echo $_GET['request'];
+// Load the Router class
+include BASE_PATH . '/core/router/router.php';
+
+// Create an instansiation of a new page
+if( !isset( $_GET['request'] ) ) {
+	$page = new Router( );
+}
+else {
+    $page = new Router( $_GET['request'] );
+}
 
 /* End of file index.php */
 /* Location: ./index.php */
