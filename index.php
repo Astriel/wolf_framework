@@ -1,5 +1,12 @@
 <?php
 
+/*
+* File index.php
+* @Author : Quentin LOZACH 
+* @Version : 0.1
+* @Page : index
+* @Role : Link all the page and the structure to load the page the user wants
+*/ 
 // Defining PATH constants related to the project
 define( 'BASE_PATH', dirname( realpath(__FILE__) ) );
 define( 'CORE_PATH', BASE_PATH . '/core' );
