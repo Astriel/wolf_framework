@@ -56,6 +56,7 @@ class Router {
 	    	unset( $request[0] );
 	    	unset( $request[1] );
 
+	    	// Getting the rest of the parameters in the $_GET['request'] in the URL
 	    	$this->params = $request;
 
 	}
