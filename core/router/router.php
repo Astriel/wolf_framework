@@ -20,6 +20,9 @@ class Router {
   // The param which will be send to the controller and maybe to the model
   public $params;
 
+  // If an error is in the Router, it would be useful to know it before
+  public $error;
+
  /*
   * @Class Router
   * @Author : Quentin LOZACH 
@@ -48,9 +51,14 @@ class Router {
 	        // Load the mainController, mainView and mainModel 
 	    	$request = explode( "/", $request );
 
+	    	if( empty( $request[1] ) && !empty( $request[0] ) ) {
+	    		$this->error("empty-method");
+	    	}
+	    	else {
 	    	$this->controller = $request[0];
 	    	$this->method = $request[1];
 	    	$this->model = $request[0];
+	    	}
 
 	    	// Getting parameters, so let's keep only useful informations
 	    	unset( $request[0] );
@@ -87,9 +95,38 @@ class Router {
 	echo "<h2>Current method in the $this->controller :</h2>";
 	var_dump( $this->method );
 
+	// If there is a param, we can print it to the user
 	if( !is_null( $this->params ) ) {
 		echo "<h2>Current params :</h2>";
 		var_dump( $this->params );
+	}
+
+  } 
+
+ /*
+  * @Class Router
+  * @Author : Quentin LOZACH 
+  * @Version : 0.1
+  * @Method : If there is an error, this method will handle it, such as 404 error for example
+  */ 
+  private function error( $typeError ) { 
+
+  	// There is an error in the Router
+  	$this->error = TRUE;
+
+  	switch ( $typeError ) {
+
+		// If there is no method in the requested page
+	    case "empty-method" :
+	    	echo "<h1 style='color:red'>No method in the URL.<h1>";
+	        break;
+
+	    case "wrong-format" :
+	    	echo "<h1 style='color:red'>The requested URL has a wronf format.<h1>";
+	        break;
+
+	    default:
+	        echo "<h1 style='color:red'>Undefined error.<h1>";
 	}
 
   } 

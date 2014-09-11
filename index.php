@@ -49,7 +49,9 @@ else {
 }
 
 // Calling the debug method for the structure creation
-$page->debug();
+if( $page->error != TRUE ) {
+    $page->debug();
+}
 
 /* End of file index.php */
 /* Location: ./index.php */
