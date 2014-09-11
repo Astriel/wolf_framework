@@ -13,6 +13,9 @@ define( 'BASE_PATH', dirname( realpath(__FILE__) ) );
 define( 'CORE_PATH', BASE_PATH . '/core' );
 define( 'CONFIG_PATH', BASE_PATH . '/configuration' );
 define( 'APP_PATH', BASE_PATH . '/application' );
+define( 'ASSETS_PATH', BASE_PATH . '/application/assets/' );
+define( 'LIB_PATH', BASE_PATH . '/application/libraries/' );
+define( 'MVC_PATH', BASE_PATH . '/application/mvc/' );
 
 // Include constants 
 include CONFIG_PATH . '/constants/mode.php';

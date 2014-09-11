@@ -1,21 +1,21 @@
 <?php 
+
 /*
 * @File core/router/router.php
 * @Author : Quentin LOZACH 
 * @Version : 0.1
 * @Role : Route the page the user is requested : controller/view/param
 */ 
-
 class Router { 
   
   // The controller to load
   public $controller;
 
+  // The method in the controller to load
+  public $method;
+
   // The model to load
   public $model;
-
-  // The view to load 
-  public $view;
 
   // The param which will be send to the controller and maybe to the model
   public $params;
@@ -37,7 +37,7 @@ class Router {
 	        // Load the mainController, mainView and mainModel 
 	    	// We suppose that we don't have any param in the index
 	    	$this->controller = "mainController";
-	    	$this->view = "mainView";
+	    	$this->method = "index";
 	    	$this->model = "mainModel";
 	    	$this->params = NULL;
 
@@ -49,7 +49,7 @@ class Router {
 	    	$request = explode( "/", $request );
 
 	    	$this->controller = $request[0];
-	    	$this->view = $request[1];
+	    	$this->method = $request[1];
 	    	$this->model = $request[0];
 
 	    	// Getting parameters, so let's keep only useful informations
@@ -57,7 +57,12 @@ class Router {
 	    	unset( $request[1] );
 
 	    	// Getting the rest of the parameters in the $_GET['request'] in the URL
-	    	$this->params = $request;
+	    	if( !empty( $request[2] ) ) {
+	    		$this->params = $request;
+	    	}
+	    	else {
+	    		$this->params = NULL;
+	    	}
 
 	}
 
@@ -79,11 +84,13 @@ class Router {
 	echo "<h2>Current model :</h2>";
 	var_dump( $this->model );
 
-	echo "<h2>Current view :</h2>";
-	var_dump( $this->view );
+	echo "<h2>Current method in the $this->controller :</h2>";
+	var_dump( $this->method );
 
-	echo "<h2>Current params :</h2>";
-	var_dump( $this->params );
+	if( !is_null( $this->params ) ) {
+		echo "<h2>Current params :</h2>";
+		var_dump( $this->params );
+	}
 
   } 
 
