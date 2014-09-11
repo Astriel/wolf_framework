@@ -45,6 +45,9 @@ else {
     $page = new Router( $_GET['request'] );
 }
 
+// Calling the debug method for the structure creation
+$page->debug();
+
 /* End of file index.php */
 /* Location: ./index.php */
 ?>
