@@ -27,7 +27,7 @@ class Router {
   * @Method : __construct : Each time a page will be load, this method will be called each time
   */ 
   function __construct( $request = FALSE ) { 
-  	
+  		
   	// Are we on the index page or note ?
 	switch ( $request ) {
 
@@ -46,6 +46,8 @@ class Router {
 	    // We are on another page so load the Controller and the model with the same name 
 	    default:
 	        // Load the mainController, mainView and mainModel 
+	    	$request = explode( "/", $request );
+
 	    	$this->controller = $request[0];
 	    	$this->view = $request[1];
 	    	$this->model = $request[0];
