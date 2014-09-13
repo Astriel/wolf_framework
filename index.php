@@ -13,6 +13,9 @@ define( 'BASE_PATH', dirname( realpath(__FILE__) ) );
 define( 'CORE_PATH', BASE_PATH . '/core' );
 define( 'CONFIG_PATH', BASE_PATH . '/configuration' );
 define( 'APP_PATH', BASE_PATH . '/application' );
+define( 'ASSETS_PATH', BASE_PATH . '/application/assets/' );
+define( 'LIB_PATH', BASE_PATH . '/application/libraries/' );
+define( 'MVC_PATH', BASE_PATH . '/application/mvc/' );
 
 // Include constants 
 include CONFIG_PATH . '/constants/mode.php';
@@ -39,14 +42,16 @@ include BASE_PATH . '/core/router/router.php';
 
 // Create an instansiation of a new page
 if( !isset( $_GET['request'] ) ) {
-	$page = new Router( );
+	$page = Router::getInstance( );
 }
 else {
-    $page = new Router( $_GET['request'] );
+    $page = Router::getInstance( $_GET['request'] );
 }
 
 // Calling the debug method for the structure creation
-$page->debug();
+if( $page->getError() != TRUE ) {
+    $page->debug();
+}
 
 /* End of file index.php */
 /* Location: ./index.php */
