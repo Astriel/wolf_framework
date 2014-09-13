@@ -16,14 +16,19 @@ class Loader {
   * @Method : __construct : Constructor will be called at the initialization of the Loader
   */ 
   function __construct(  ) { 
-  		
-  } 
 
-  // Not sure about all that shit for the moment, doest not matter, I'll need methods like this later ... 
-  // But maybe not here and not like this
+    // Defining constants to access to Controller, Model, View folders
+  	define( 'CONTROLLER_PATH', MVC_PATH . 'controller/' );
+    define( 'MODEL_PATH', MVC_PATH . 'model/' );
+    define( 'VIEW_PATH', MVC_PATH . 'view/' );
+
+  } 
 
   public function loadController( $controller = FALSE ) {
 
+    include CONTROLLER_PATH . "$controller.php";
+    new $controller();
+    
   }
 
   public function loadModel( $model = FALSE ) {
@@ -35,7 +40,7 @@ class Loader {
   }
 
   public function loadView( $view = FALSE ) {
-  	
+  	echo "VIEW";
   }
 }
 ?>

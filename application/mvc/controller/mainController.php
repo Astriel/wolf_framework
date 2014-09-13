@@ -15,7 +15,9 @@ class mainController {
   * @Method : __construct : Constructor of the mainController called in the index page
   */ 
   function __construct( ) { 
+    // $this->loadView("test");
 
+    echo "mainController loaded";
   } 
 
  /*

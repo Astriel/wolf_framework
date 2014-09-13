@@ -42,14 +42,14 @@ include BASE_PATH . '/core/router/router.php';
 
 // Create an instansiation of a new page
 if( !isset( $_GET['request'] ) ) {
-	$page = new Router( );
+	$page = Router::getInstance( );
 }
 else {
-    $page = new Router( $_GET['request'] );
+    $page = Router::getInstance( $_GET['request'] );
 }
 
 // Calling the debug method for the structure creation
-if( $page->error != TRUE ) {
+if( $page->getError() != TRUE ) {
     $page->debug();
 }
 
