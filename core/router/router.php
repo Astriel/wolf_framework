@@ -1,10 +1,14 @@
 <?php 
+
 include BASE_PATH . '/core/lib/singleton.php';
+
 /**
+* Route the page the user is requested : controller/view/param
+*
 * @file core/router/router.php
-* @author : Quentin LOZACH 
+* @class router
+* @author Quentin LOZACH 
 * @version : 0.1
-* @role : Route the page the user is requested : controller/view/param
 */ 
 class Router extends Singleton { 
   
@@ -40,11 +44,25 @@ class Router extends Singleton {
   */
   private $error;
 
+  /**
+  * Constructor of the Router class
+  *
+  * @method __construct
+  * @access private
+  * @param  void
+  * @return void 
+  * @author Quentin LOZACH
+  * @version 0.1
+  */
+  final private function __construct( ) {
+    
+  }
+
  /**
   * Each time a page will be load, this method will be called each time
   *
   * TODO : How are we supposed to provide the request string like so if it is a singleton? 
-  *			Maxime Martineau
+  *	Maxime Martineau
   *
   * @method parseRequest
   * @access public
