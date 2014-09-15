@@ -40,17 +40,17 @@ switch ( APP_MODE ) {
 // Load the Router class
 include BASE_PATH . '/core/router/router.php';
 
-// Create an instansiation of a new page
+// Create an instance of a new page
 if( !isset( $_GET['request'] ) ) {
-	$page = Router::getInstance( );
+	Router::getInstance()->parseRequest();
 }
 else {
-    $page = Router::getInstance( $_GET['request'] );
+	Router::getInstance()->parseRequest( $_GET['request'] );
 }
 
 // Calling the debug method for the structure creation
-if( $page->getError() != TRUE ) {
-    $page->debug();
+if( Router::getInstance()->getError() != TRUE ) {
+    Router::getInstance()->debug();
 }
 
 /* End of file index.php */

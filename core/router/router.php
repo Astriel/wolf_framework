@@ -1,12 +1,12 @@
 <?php 
-
+include BASE_PATH . '/core/lib/singleton.php';
 /**
 * @file core/router/router.php
 * @author : Quentin LOZACH 
 * @version : 0.1
 * @role : Route the page the user is requested : controller/view/param
 */ 
-class Router { 
+class Router extends Singleton { 
   
   /**
   * The controller to load
@@ -40,26 +40,20 @@ class Router {
   */
   private $error;
 
-  /**
-  * get the unique instance of the class regarding the Singleton pattern
-  *
-  * @var instance 
-  * @access private
-  * @static
-  */
-  private static $_instance = null;
- 
  /**
   * Each time a page will be load, this method will be called each time
   *
-  * @method __construct
-  * @access private
+  * TODO : How are we supposed to provide the request string like so if it is a singleton? 
+  *			Maxime Martineau
+  *
+  * @method parseRequest
+  * @access public
   * @param string $request URL of the requested page
   * @return void
   * @author Quentin LOZACH 
   * @version 0.1
   */ 
-  private function __construct( $request = FALSE ) { 
+  public function parseRequest( $request = FALSE ) { 
 
   	// Load the Loader class
 	include BASE_PATH . '/core/loader/loader.php';
@@ -85,67 +79,50 @@ class Router {
 	    // We are on another page so load the Controller and the model with the same name 
 	    default:
 
-	        // Load the mainController, mainView and mainModel 
-	    	$requestExploded = explode( "/", $request );
+			// Load the mainController, mainView and mainModel 
+			$requestExploded = explode( "/", $request );
 
-	    	// If the user is trying to load a file directly in the URL such as : .php, .html, .css, .js, .sql ...
-	    	$requestSecured = explode( ".", $request );
+			// If the user is trying to load a file directly in the URL such as : .php, .html, .css, .js, .sql ...
+			$requestSecured = explode( ".", $request );
 
-	    	// If there is only a controller with no method, raise an error with error() method
-	    	if( empty( $requestExploded[1] ) && !empty( $requestExploded[0] ) ) {
-	    		$this->error("empty-method");
-	    	}
-	    	// If there is a controller and a method in parameters in the URL 
-	    	else {
+			// If there is only a controller with no method, raise an error with error() method
+			if( empty( $requestExploded[1] ) && !empty( $requestExploded[0] ) ) {
+				$this->error("empty-method");
+			}
+			// If there is a controller and a method in parameters in the URL 
+			else {
 
-	    		// If requestSecured[1] is not empty the user tried to load a file in the URL
-	    		if( isset( $requestSecured[1] ) ) {
-	    			// The controller is the name of the 1st param but cleaned with the explode
-	    			$this->controller = $requestSecured[0];
-	    		}
-	    		else {
-		    		// The controller is the first parameter of the URL 
-			    	$this->controller = $requestExploded[0];
-			    }
+				// If requestSecured[1] is not empty the user tried to load a file in the URL
+				if( isset( $requestSecured[1] ) ) {
+					// The controller is the name of the 1st param but cleaned with the explode
+					$this->controller = $requestSecured[0];
+				}
+				else {
+					// The controller is the first parameter of the URL 
+					$this->controller = $requestExploded[0];
+				}
 
-		    	// The method is the second parameter of the URL 
-		    	$this->method = $requestExploded[1];
-	    	}
+				// The method is the second parameter of the URL 
+				$this->method = $requestExploded[1];
+			}
 
-	    	// Getting parameters, so let's keep only useful informations
-	    	unset( $requestExploded[0] );
-	    	unset( $requestExploded[1] );
+			// Getting parameters, so let's keep only useful informations
+			unset( $requestExploded[0] );
+			unset( $requestExploded[1] );
 
-	    	// Getting the rest of the parameters in the $_GET['request'] in the URL
-	    	if( !empty( $requestExploded[2] ) ) {
-	    		$this->params = $requestExploded;
-	    	}
-	    	else {
-	    		$this->params = NULL;
-	    	}
+			// Getting the rest of the parameters in the $_GET['request'] in the URL
+			if( !empty( $requestExploded[2] ) ) {
+				$this->params = $requestExploded;
+			}
+			else {
+				$this->params = NULL;
+			}
 
 	}
 
   } 
 
- /**
-  * Singleton patern : return the only instance of the router class
-  *
-  * @method getInstance
-  * @access public
-  * @param  string $request URL of the requested page
-  * @return Router
-  * @author Quentin LOZACH
-  * @version 0.1
-  */
-  public static function getInstance( $request = FALSE ) {
- 
-     if(is_null(self::$_instance)) {
-       self::$_instance = new Router( $request );  
-     }
- 
-     return self::$_instance;
-  }
+
 
  /**
   * If there is a problem in the core we can know exactly where does the problem comes from
