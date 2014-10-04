@@ -1,11 +1,14 @@
 <?php
 /**
 * @file core/lib/singleton.php
-* @author : Quentin LOZACH 
-* @version : 0.1
 * @role : Singleton abstract class
+* @class Singleton
+* @author Quentin LOZACH & Maxime MARTINEAU
+* @version 0.1
 */ 
+
 class Singleton {
+  
  /**
   * get the unique instance of the class regarding the Singleton pattern
   *
@@ -15,34 +18,54 @@ class Singleton {
   */
   private static $_instances = array();
 
-  /**
-   * private constructor
-   */
+ /**
+  * Constructor of a Singleton Class
+  *
+  * @method __construct
+  * @access private
+  * @param  void
+  * @return Object 
+  * @author Quentin LOZACH & Maxime MARTINEAU
+  * @version 0.1
+  */
   final private function __construct(){
   	
   }
 
-  /**
-   * No object cloning
-   */ 
-  final private function __clone() {}
+ /**
+  * No clone object
+  *
+  * @method __clone
+  * @access private
+  * @param  void
+  * @return void 
+  * @author Quentin LOZACH & Maxime MARTINEAU
+  * @version 0.1
+  * @version 0.1
+  */ 
+  final private function __clone() {
+
+  }
 
  /**
-  * Singleton patern : return the only instance of the router class
+  * Singleton patern : return the only instance of the the class
   *
   * @method getInstance
   * @access public
-  * @param  string $request URL of the requested page
-  * @return Router
-  * @author Quentin LOZACH
+  * @param  void
+  * @return Object 
+  * @author Quentin LOZACH & Maxime MARTINEAU
   * @version 0.1
   */
   final public static function getInstance( ) {
-	$c = get_called_class();
-     if(!isset(self::$_instances[$c])) {
-       self::$_instances[$c] = new $c;  
+
+	$calledClass = get_called_class( );
+
+     if( !isset( self::$_instances[$calledClass] ) ) {
+       self::$_instances[$calledClass] = new $calledClass;  
      }
  
-     return self::$_instances[$c];
+     return self::$_instances[$calledClass];
   }
+  
 }
