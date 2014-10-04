@@ -1,5 +1,5 @@
 <?php 
-include BASE_PATH . '/core/lib/singleton.php';
+
 /**
 * Route the page the user is requested : controller/view/param
 *
