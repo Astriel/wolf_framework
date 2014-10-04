@@ -40,6 +40,9 @@ switch ( APP_MODE ) {
 // Load the Singleton Pattern 
 include BASE_PATH . '/core/lib/singleton.php';
 
+// Load the Error class
+include BASE_PATH . '/core/error/error.php';
+
 // Load the Router class
 include BASE_PATH . '/core/router/router.php';
 
@@ -52,7 +55,7 @@ else {
 }
 
 // Calling the debug method for the structure creation
-if( Router::getInstance()->getError() == TRUE ) {
+if( Error::getInstance()->status == TRUE ) {
     Router::getInstance()->debug();
 }
 
