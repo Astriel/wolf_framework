@@ -1,12 +1,14 @@
 <?php
 /**
 * @file core/lib/singleton.php
+* @role : Singleton abstract class
 * @class Singleton
-* @author Quentin LOZACH 
+* @author Quentin LOZACH & Maxime MARTINEAU
 * @version 0.1
-* @role Singleton abstract class
 */ 
+
 class Singleton {
+  
  /**
   * get the unique instance of the class regarding the Singleton pattern
   *
@@ -23,7 +25,7 @@ class Singleton {
   * @access private
   * @param  void
   * @return Object 
-  * @author Quentin LOZACH
+  * @author Quentin LOZACH & Maxime MARTINEAU
   * @version 0.1
   */
   final private function __construct(){
@@ -37,7 +39,8 @@ class Singleton {
   * @access private
   * @param  void
   * @return void 
-  * @author Quentin LOZACH
+  * @author Quentin LOZACH & Maxime MARTINEAU
+  * @version 0.1
   * @version 0.1
   */ 
   final private function __clone() {
@@ -45,13 +48,13 @@ class Singleton {
   }
 
  /**
-  * Singleton patern : return the only instance of the router class
+  * Singleton patern : return the only instance of the the class
   *
   * @method getInstance
   * @access public
   * @param  void
   * @return Object 
-  * @author Quentin LOZACH
+  * @author Quentin LOZACH & Maxime MARTINEAU
   * @version 0.1
   */
   final public static function getInstance( ) {

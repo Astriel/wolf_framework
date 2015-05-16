@@ -1,4 +1,5 @@
 <?php 
+
 /**
 * Route the page the user is requested : controller/view/param
 *
@@ -33,19 +34,8 @@ class Router extends Singleton {
   */
   private $params;
 
-  /**
-  * If an error is in the Router, it would be useful to know it before
-  *
-  * @var error 
-  * @access private
-  */
-  private $error;
-
  /**
   * Each time a page will be load, this method will be called each time
-  *
-  * TODO : How are we supposed to provide the request string like so if it is a singleton? 
-  *	Maxime Martineau
   *
   * @method parseRequest
   * @access public
@@ -86,8 +76,9 @@ class Router extends Singleton {
 
   			// If there is only a controller with no method, raise an error with error() method
   			if( empty( $requestExploded[1] ) && !empty( $requestExploded[0] ) ) {
-  				$this->error("empty-method");
+  				Error::getInstance()->setError( "No method was in parameters." );
   			}
+        
   			// If there is a controller and a method in parameters in the URL 
   			else {
 
@@ -126,6 +117,7 @@ class Router extends Singleton {
 
   } 
 
+
  /**
   * If there is a problem in the core we can know exactly where does the problem comes from
   * 
@@ -154,65 +146,7 @@ class Router extends Singleton {
 
   } 
 
- /**
-  * If there is an error, this method will handle it, such as 404 error for example
-  * 
-  * @method error
-  * @access public
-  * @param string $typeError the type of the error, array $infosError some params linked to the error
-  * @return void
-  * @author Quentin LOZACH 
-  * @version 0.1
-  */ 
-  public function error( $typeError, $infosError ) { 
-
-    	// There is an error in the Router
-    	$this->setError( TRUE );
-
-    	switch ( $typeError ) {
-
-  		// If there is no method in the requested page
-  	    case "empty-method" :
-  	    	echo "<h1 style='color:red'>No method in the URL.</h1>";
-  	        break;
-
-  	    case "wrong-format" :
-  	    	echo "<h1 style='color:red'>The requested URL has a wronf format.</h1>";
-  	        break;
-
-        case "wrong-controller" :
-          echo "<h1 style='color:red'>The controller does not exist</h1>";
-            break;
-
-        case "no-controller" :
-          echo "<h1 style='color:red'>No controller was loaded</h1>";
-            break;
-
-        case "no-method" :
-          echo "<h1 style='color:red'>No method was loaded</h1>";
-            break;
-
-  	    default :
-  	        echo "<h1 style='color:red'>Undefined error.</h1>";
-  	}
-
-  } 
-
   /* =================== GETTERS ========================= */
-
-  /**
-  * Return the error attribute of the class
-  * 
-  * @method getError
-  * @access public
-  * @param void
-  * @return string $error return the attribute of the classe Router
-  * @author : Quentin LOZACH 
-  * @version : 0.1
-  */ 
-  public function getError( ) { 
-  	return $this->error;
-  }
 
   /**
   * Return the controller attribute of the class
@@ -226,22 +160,6 @@ class Router extends Singleton {
   */ 
   public function getController( ) { 
     return $this->controller;
-  }
-
-  /* =================== SETTERS ========================= */
-
-  /**
-  * Set the error attribute of the class
-  * 
-  * @method setError
-  * @access public
-  * @param string $value new value of the paramater error
-  * @return void
-  * @author : Quentin LOZACH 
-  * @version : 0.1
-  */ 
-  public function setError( $value ) { 
-    $this->error = $value;
   }
 
 }

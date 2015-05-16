@@ -31,7 +31,7 @@ class Loader extends Singleton {
 
         // If the file is not existing
         if(!file_exists(CONTROLLER_PATH. "$controller.php")) {
-          Router::getInstance()->error( "no-controller", $controller );
+          Error::getInstance()->setError( "The Controller you try to load does not exist." );
         } 
         else {
            // If the file exists, we load the Controller 
@@ -42,7 +42,7 @@ class Loader extends Singleton {
 
       }
       else {
-          Router::getInstance()->errors("no-controller");
+          Error::getInstance()->setError( "The controller you try to load does not exist." );
       }
 
   }
@@ -66,7 +66,7 @@ class Loader extends Singleton {
 
         // If the file is not existing
         if( !method_exists ( $controller, $method ) ) {
-          Router::getInstance()->error( "no-method", $method );
+          Error::getInstance()->setError( "The method you try to load does not exist." );
         } 
         else {
            $controller::$method();
@@ -74,7 +74,7 @@ class Loader extends Singleton {
 
       }
       else {
-          Router::getInstance()->errors("no-method");
+          Error::getInstance()->setError( "The method you try to load does not exist." );
       }
 
   }
